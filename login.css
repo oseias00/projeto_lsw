@@ -1,4 +1,95 @@
-*{
+body {
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #121212;
+    color: #FFD700;
+    text-align: center;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: #222;
+}
+
+h1 {
+    margin: 0;
+    font-size: 35px;
+}
+
+nav a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: #FFA500;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #FFD700;
+}
+
+main {
+    padding: 30px 20px;
+}
+
+section{
+    width: 90%;
+    border: 1px solid yellow;
+    height: 80vh;
+    margin: auto;
+    display: flex;
+    box-shadow: 0px 0px 5px yellow;
+}
+
+
+#conteudo{
+    width: 45%;
+    height: 100%;
+    border: 1px solid red;
+    
+}
+
+#img-login{
+    width: 70%;
+    margin: auto;
+    
+}
+
+#card-login{
+    width: 55%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    
+
+}
+
+
+#card-login> form> *{
+    color: white;
+}
+
+form{
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+form>input{
+    width: 250px;
+    height: 25px;
+    border-radius: 6px;
+}
+
+
+footer {
+    margin-top: 30px;
+    padding: 10px;
+    background: #222;
 }
