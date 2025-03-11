@@ -38,34 +38,37 @@ main {
 
 section{
     width: 90%;
-    border: 1px solid yellow;
     height: 80vh;
     margin: auto;
-    display: flex;
+    display:flex ;
+    align-items: center;
     box-shadow: 0px 0px 5px yellow;
+    border-radius: 10px;
+    padding: 12px;
+   
 }
 
 
 #conteudo{
-    width: 45%;
+    width: 55%;
     height: 100%;
-    border: 1px solid red;
-    
 }
 
 #img-login{
-    width: 70%;
+    width: 60%;
     margin: auto;
     
 }
 
 #card-login{
-    width: 55%;
-    height: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    
+    background-color: #212020;
+    width: 35%;
+    height: 70%;
+    margin: auto;
+    padding-top: 17px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 4px #212020;
+
 
 }
 
@@ -74,18 +77,60 @@ section{
     color: white;
 }
 
+#card-login > h1{
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 30px;
+    
+}
+
+#card-login > h2{
+    margin-bottom: 35px;
+}
+
 form{
+    display: flex;
     flex-direction: column;
-    gap: 10px;
     justify-content: center;
     align-items: center;
 }
 
 form>input{
-    width: 250px;
-    height: 25px;
+    width:  80%;
+    height: 35px;
     border-radius: 6px;
+    margin-bottom: 20px;
+    background-color: #121212;
+    box-shadow: 0px 0px black;
 }
+
+form>button{
+    width: 65%;
+    height: 35px;
+    margin: auto;
+    background-color:  #FFA500;
+    border-radius: 10px;
+    box-shadow: 0px 0px black;
+    margin-bottom: 20px;
+}
+
+#card-login>p{
+    font-size: 15px;
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+#card-login>p>a{
+    color: #f3f3f3;
+    text-decoration: none;
+}
+
+#card-login>p>a:hover{
+    color: #FFA500;
+}
+
+
 
 
 footer {
