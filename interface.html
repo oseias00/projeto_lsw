@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Senhas</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="imagens/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="imagens/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="imagens/favicon-16x16.png">
+    <link rel="stylesheet" href="interface.css">
+</head>
+<body>
+    <header>
+        <h1>Gerenciador de Senhas</h1>
+        <nav>
+            <a href="index.html">Sair</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="password-storage">
+            <h2>Armazenar Senhas</h2>
+            <form id="passwordForm">
+                <input type="text" id="site" name="site" placeholder="Site" required>
+                <input type="text" id="username" name="username" placeholder="Usuário/Email" required>
+                <input type="text" id="password" name="password" placeholder="Senha" required>
+                <button type="submit">Salvar</button>
+            </form>
+            <ul id="passwordList"></ul>
+        </section>
+
+        <section class="password-generator">
+            <h2>Gerador de Senhas</h2>
+            <button id="generatePassword">Gerar Senha</button>
+            <p id="generatedPassword"></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Gerenciador de Senhas. Todos os direitos reservados.</p>
+        <p>Feito por Oséias e Yuri Kiev.</p>
+    </footer>
+
+    <script src="interface.js"></script>
+</body>
+</html>
