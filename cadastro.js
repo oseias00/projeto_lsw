@@ -1,8 +1,10 @@
 const btnEntrar = document.getElementById('enviar')
 const arrayErros = []
+const formulario = document.getElementById('formulario')
+const divErros =  document.getElementById('erros')
 btnEntrar.addEventListener('click', e =>{
 
-    if (!form.checkValidity()) {
+    if (!formulario.checkValidity()) {
         // O navegador exibirá os erros normalmente
         return;
     }
@@ -16,22 +18,25 @@ btnEntrar.addEventListener('click', e =>{
 
 
     //se passar da validacao, cria um novo objeto Usuario e manda para o localStorage
-    if(valida(user.value, email.value, senha.value, confirmaSenha.value !== true)){
+    valida(user, email, senha, confirmaSenha)
+    if(arrayErros.length > 0){
         
         for(let err of arrayErros){
             console.log(err)
             exibeErro(err)
+            arrayErros.shift(err)
         }
-        
-       
-      
+
         return
     }
     else{
         const usuario = new Usuario(user.value, email.value, senha.value)
         const usuarioJson = JSON.stringify(usuario)
         localStorage.setItem(id(), usuarioJson)
-        console.log('cadastroCriado')
+        divErros.style.display = 'none'
+       
+
+        alert('cadastroCriado')
     }
 
    
@@ -49,15 +54,12 @@ class Usuario{
 }
     function valida(user, email, senha, confirmaSenha){
     //valida se o nome de usuario já existe
-    if(!validaNome(user, email)){
-        arrayErros.push('nome de Usuário e/ou email ja existe')
-        //return false
+    if(!validaNome(user, email)) return false
 
-    }
-    //valida se os campos de senha sao iguais
     
+    //valida se os campos de senha sao iguais
 
-    if(senha !== confirmaSenha){
+    if(senha.value !== confirmaSenha.value){
         arrayErros.push('senha e confirmação de senha diferentes')
         senha.value = ''
         confirmaSenha.value = ''
@@ -68,7 +70,7 @@ class Usuario{
     let maiusculo = 0
     let minusculo = 0
     let num = 0
-    for(let caractere of senha){
+    for(let caractere of senha.value){
         //verifica se é maiusculo
         if(caractere === caractere.toUpperCase() && isNaN(Number(caractere)) ) maiusculo++
         //verifica se é minusculo
@@ -81,14 +83,14 @@ class Usuario{
 
     //verifica se tem ao menos uma letra maiuscula, minuscula e um numero
     if(maiusculo === 0 || num === 0 || minusculo === 0){
-        arrayErros.push('SENHA: faltando maiscula, minusculo ou numero')
+        arrayErros.push('SENHA: faltando maiuscula, minusculo ou numero')
         senha.value = ''
         confirmaSenha.value = ''
         //return false
     }
 
 
-    return true
+    
 }
 
 //verifica se ja tem alguem com o mesmo nome de usuario ou mesmo email
@@ -100,16 +102,16 @@ function validaNome(username, userEmail){
         const Obj = JSON.parse(valor)
         console.log('tamanho:' , localStorage.length)
 
-        if(Obj.user === username){
+        if(Obj.user === username.value){
             arrayErros.push('nome de usuario ja existe')
             user.value = ''
-            //return false
+            return false
         } 
 
-        if(Obj.email === userEmail){
+        if(Obj.email === userEmail.value){
             arrayErros.push('email ja existe')
             email.value = ''
-           // return false
+            return false
         }
     }
 
@@ -123,8 +125,8 @@ function id(){
 
 
 function exibeErro(erro){
-    const divErros =  document.getElementById('erros')
     const listaErros = document.getElementById('listaErr')
+
     const li = document.createElement('li')
     li.innerHTML = erro
     listaErros.appendChild(li)
