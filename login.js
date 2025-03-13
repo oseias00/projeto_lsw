@@ -4,8 +4,11 @@ const senha = document.getElementById('senha')
 const btnLogin = document.getElementById('btnLogin')
 
 btnLogin.addEventListener('click', e =>{
+    if (!btnLogin.checkValidity()) {
+        return;
+    }
     e.preventDefault()
-    if(!Login()) alert('erro de login')
+    if(!Login())  exibeErro('Email e/ou senha incorretos')
 
     
 })
@@ -38,11 +41,24 @@ function Login(){
             return true
         }
         else{
-            console.log('erro de login')
             console.log('--------------------------')
         }
     
     }
     return false
    
+}
+
+function exibeErro(erro){
+    const divErros =  document.getElementById('erros')
+    const listaErros = document.getElementById('listaErr')
+    const li = document.createElement('li')
+    li.innerHTML = erro
+    listaErros.appendChild(li)
+    divErros.style.display = 'block'
+
+    setTimeout(() => {
+        listaErros.removeChild(li)
+         divErros.style.display = 'none'
+    }, 6000);
 }

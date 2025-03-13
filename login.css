@@ -138,3 +138,22 @@ footer {
     padding: 10px;
     background: #222;
 }
+
+div#erros{
+    display: none;
+    margin: auto;
+    width: 85%;
+    border: 1px solid red;
+    border-radius: 10px;
+    text-align: start;
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+div#erros>ul{
+    margin-left: 0px;
+}
+
+div#erros>h1{
+    text-align: center;
+}
