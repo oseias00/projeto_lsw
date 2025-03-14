@@ -1,3 +1,6 @@
+//imports
+import bcrypt from "bcryptjs"
+//pegando elementos do html
 const btnEntrar = document.getElementById('enviar')
 const arrayErros = []
 const formulario = document.getElementById('formulario')
@@ -30,7 +33,8 @@ btnEntrar.addEventListener('click', e =>{
         return
     }
     else{
-        const usuarioNovo = new Usuario(user.value, email.value, senha.value)
+        const usuarioNovo = new Usuario(user.value, email.value, criaHash(senha.value))
+        console.log(usuarioNovo)
         try{ let usuarios = localStorage.getItem('usuarios')
             usuarios = JSON.parse(usuarios)
             usuarios.push(usuarioNovo)
@@ -163,7 +167,8 @@ function exibeErro(erro){
 }
 
 //cria hash de senha
-function criaHash(){
-
+function criaHash(senha){
+    const salt = 10
+    return bcrypt.hashSync(senha, salt)
 }
 
