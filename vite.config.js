@@ -9,4 +9,6 @@ export default defineConfig({
       },
     },
   },
+  base: "/projeto_lsw"
+
 });
