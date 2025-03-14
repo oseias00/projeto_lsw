@@ -34,6 +34,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    function logout() {
+        localStorage.removeItem('Sessão');
+        window.location.href = 'login.html';
+      }
+
     function displayPasswords() {
         passwordList.innerHTML = "";
         const passwords = JSON.parse(localStorage.getItem("passwords")) || [];
