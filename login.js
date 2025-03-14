@@ -15,8 +15,29 @@ btnLogin.addEventListener('click', e =>{
 
 
 function Login(){
+
+    try{
+        let usuarios = localStorage.getItem('usuarios')
+        usuarios  = JSON.parse(usuarios)
+        for(let i = 0; i<usuarios.length; i++){
+            
+        if(email.value === usuarios[i].email && senha.value === usuarios[i].senha){
+            console.log('login efetuado com sucesso')
+            localStorage.setItem("Sessão", usuarios[i].user)
+            return true
+        }
+        else{
+            console.log('--------------------------')
+        }
+
+        }
+
+
+    }catch{
+        exibeErro('Ainda não há nenhum usuário cadastrado') 
+    }
   
-    for(let i = 0; i<localStorage.length; i++){
+    /*for(let i = 0; i<localStorage.length; i++){
         const objVazio = {email: 'obj vazio', senha: 'objvazio'}
         const chave = localStorage.key(i)
         const valor = localStorage.getItem(chave)
@@ -45,7 +66,7 @@ function Login(){
         }
     
     }
-    return false
+    return false*/
    
 }
 
