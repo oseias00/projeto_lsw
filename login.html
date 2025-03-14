@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <title>Login</title>
+</head>
+<body>
+    <header>
+        <h1>Gerenciador de Senhas</h1>
+        <nav>
+            <a href="login.html">Login</a>
+            <a href="cadastro.html">Cadastrar</a>
+        </nav>
+    </header>
+
+    <main>
+        <div id="erros">
+            <h1>Erro de login</h1>
+           <ul id="listaErr">
+            
+           </ul>
+        </div>
+        <section>
+            <div id="conteudo">
+               <h1>Bem vindo de volta!</h1>
+                <h2>Aqui você tem a garantia da proteção dos seus dados!</h2>
+                <img id="img-login" src="imagens/security.png" alt="imagem-notebook-cadeado">
+            </div>
+
+            <div id="card-login" >
+               <h1>Login</h1>
+
+               <form action="">
+                <input type="text" name="Email" id="email" placeholder="Digite seu Email" required>   
+
+                <input type="password" name="Senha" id="senha" placeholder="Digite sua senha" required>
+
+                <button type="submit" id="btnLogin">Entrar</button>
+                </form>
+
+                <p>Já tem uma conta?, <a href="cadastro.html">clique aqui</a> e cadastre-se!</p>
+               
+            </div>
+
+            
+        </section>
+    </main>
+
+    <script src="login.js"></script>
+</body>
+</html>

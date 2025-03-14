@@ -1,0 +1,159 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #FFD700;
+    text-align: center;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: #222;
+}
+
+h1 {
+    margin: 0;
+    font-size: 35px;
+}
+
+nav a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: #FFA500;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #FFD700;
+}
+
+main {
+    padding: 30px 20px;
+}
+
+section{
+    width: 90%;
+    height: 80vh;
+    margin: auto;
+    display:flex ;
+    align-items: center;
+    box-shadow: 0px 0px 5px yellow;
+    border-radius: 10px;
+    padding: 12px;
+   
+}
+
+
+#conteudo{
+    width: 55%;
+    height: 100%;
+}
+
+#img-login{
+    width: 60%;
+    margin: auto;
+    
+}
+
+#card-login{
+    background-color: #212020;
+    width: 35%;
+    height: 70%;
+    margin: auto;
+    padding-top: 17px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 4px #212020;
+
+
+}
+
+
+#card-login> form> *{
+    color: white;
+}
+
+#card-login > h1{
+    font-size: 50px;
+    text-align: center;
+    margin-bottom: 30px;
+    
+}
+
+#card-login > h2{
+    margin-bottom: 35px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form>input{
+    width:  80%;
+    height: 35px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    background-color: #121212;
+    box-shadow: 0px 0px black;
+}
+
+form>button{
+    width: 65%;
+    height: 35px;
+    margin: auto;
+    background-color:  #FFA500;
+    border-radius: 10px;
+    box-shadow: 0px 0px black;
+    margin-bottom: 20px;
+}
+
+#card-login>p{
+    font-size: 15px;
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+#card-login>p>a{
+    color: #f3f3f3;
+    text-decoration: none;
+}
+
+#card-login>p>a:hover{
+    color: #FFA500;
+}
+
+
+
+
+footer {
+    margin-top: 30px;
+    padding: 10px;
+    background: #222;
+}
+
+div#erros{
+    display: none;
+    margin: auto;
+    width: 85%;
+    border: 1px solid red;
+    border-radius: 10px;
+    text-align: start;
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+div#erros>ul{
+    margin-left: 0px;
+}
+
+div#erros>h1{
+    text-align: center;
+}
