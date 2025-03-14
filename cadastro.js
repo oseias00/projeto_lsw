@@ -30,9 +30,22 @@ btnEntrar.addEventListener('click', e =>{
         return
     }
     else{
-        const usuario = new Usuario(user.value, email.value, senha.value)
-        const usuarioJson = JSON.stringify(usuario)
-        localStorage.setItem(id(), usuarioJson)
+        const usuarioNovo = new Usuario(user.value, email.value, senha.value)
+        try{ let usuarios = localStorage.getItem('usuarios')
+            usuarios = JSON.parse(usuarios)
+            usuarios.push(usuarioNovo)
+            JSON.stringify(usuarios)
+
+            localStorage.setItem('usuarios', JSON.stringify(usuarios))
+        }catch{
+            const arrayUsuarios = []
+            arrayUsuarios.push(usuarioNovo)
+            
+            localStorage.setItem('usuarios', JSON.stringify(arrayUsuarios))
+        }
+        
+        
+
         divErros.style.display = 'none'
        
 
@@ -54,7 +67,8 @@ class Usuario{
 }
     function valida(user, email, senha, confirmaSenha){
     //valida se o nome de usuario já existe
-    if(!validaNome(user, email)) return false
+    validaNome(user, email)
+    if(arrayErros.length > 0) return false
 
     
     //valida se os campos de senha sao iguais
@@ -95,25 +109,36 @@ class Usuario{
 
 //verifica se ja tem alguem com o mesmo nome de usuario ou mesmo email
 function validaNome(username, userEmail){
-    for(let i = 0; i<localStorage.length; i++){
-        console.log(i)
-        const chave = localStorage.key(i)
-        const valor = localStorage.getItem(chave)
-        const Obj = JSON.parse(valor)
-        console.log('tamanho:' , localStorage.length)
+    try{
 
-        if(Obj.user === username.value){
-            arrayErros.push('nome de usuario ja existe')
-            user.value = ''
-            return false
-        } 
+        let TodosOsUsuarios = localStorage.getItem('usuarios')
+        TodosOsUsuarios = JSON.parse(TodosOsUsuarios)
+        console.log(TodosOsUsuarios.length)
+        for(let i = 0; i<TodosOsUsuarios.length; i++){
+           console.log('usuario: ', TodosOsUsuarios[i].user)
+           console.log('emial: ', TodosOsUsuarios[i].email)
+            if(TodosOsUsuarios[i].user === username.value){
+                arrayErros.push('nome de usuario ja existe')
+                user.value = ''
+                
+            } 
+    
+            if(TodosOsUsuarios[i].email === userEmail.value){
+                arrayErros.push('email ja existe')
+                email.value = ''
+                
+            }
 
-        if(Obj.email === userEmail.value){
-            arrayErros.push('email ja existe')
-            email.value = ''
-            return false
-        }
+            
+    
+        }      
+                
+
     }
+    catch(e){
+        console.log(e)
+    }
+
 
     return true
 }
