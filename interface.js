@@ -1,3 +1,6 @@
+//imports
+import CryptoJS from "crypto-js";
+const chaveSecreta = 'minhaChaveSuperSecreta';
 document.addEventListener("DOMContentLoaded", () => {
     const passwordForm = document.getElementById("passwordForm");
     const passwordList = document.getElementById("passwordList");
@@ -35,7 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (site && username && password) {
             const userPasswords = JSON.parse(localStorage.getItem(`passwords_${userLoggedIn}`)) || [];
-            userPasswords.push({ site, username, password });
+            const senhaCriptografada = CryptoJS.AES.encrypt(password,chaveSecreta).toString()
+
+
+            userPasswords.push({ site, username, senhaCriptografada });
             localStorage.setItem(`passwords_${userLoggedIn}`, JSON.stringify(userPasswords));
             displayPasswords();
             passwordForm.reset();
@@ -53,12 +59,16 @@ document.addEventListener("DOMContentLoaded", () => {
     function displayPasswords() {
         passwordList.innerHTML = "";
         const userPasswords = JSON.parse(localStorage.getItem(`passwords_${userLoggedIn}`)) || [];
+
         userPasswords.forEach((entry, index) => {
+            console.log(entry.password)
+            const bytes = CryptoJS.AES.decrypt(entry.senhaCriptografada, chaveSecreta);
+            const senhaDescriptografada = bytes.toString(CryptoJS.enc.Utf8)
             const li = document.createElement("li");
             li.classList.add("password-item");
             li.innerHTML = `<strong>${entry.site}</strong> - ${entry.username} 
                 <div style='display: flex; align-items: center;'>
-                    <input type='password' value='${entry.password}' readonly style='flex: 1; margin-right: 5px;'>
+                    <input type='password' value='${senhaDescriptografada}' readonly style='flex: 1; margin-right: 5px;'>
                     <button onclick='togglePassword(this)' style='font-size: 12px; padding: 3px 5px;'>👁️</button>
                     <button onclick='deletePassword(${index})' style='font-size: 12px; padding: 3px 5px;'>❌</button>
                 </div>`;
