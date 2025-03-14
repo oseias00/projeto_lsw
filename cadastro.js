@@ -1,7 +1,10 @@
+//imports
+import bcrypt from "bcryptjs"
+//pegando elementos do html
 const btnEntrar = document.getElementById('enviar')
-const arrayErros = []
+let arrayErros = []
 const formulario = document.getElementById('formulario')
-const divErros =  document.getElementById('erros')
+const divMsgs =  document.querySelector('.divMsgs')
 btnEntrar.addEventListener('click', e =>{
 
     if (!formulario.checkValidity()) {
@@ -23,33 +26,43 @@ btnEntrar.addEventListener('click', e =>{
         
         for(let err of arrayErros){
             console.log(err)
-            exibeErro(err)
+            exibeMsg(err)
             arrayErros.shift(err)
         }
-
+        arrayErros = []
         return
     }
     else{
-        const usuarioNovo = new Usuario(user.value, email.value, senha.value)
+        const usuarioNovo = new Usuario(user.value, email.value, criaHash(senha.value))
+        //usando o try  e catch para testar se existe uma chave chamada 'usuarios' no localstorage
         try{ let usuarios = localStorage.getItem('usuarios')
             usuarios = JSON.parse(usuarios)
             usuarios.push(usuarioNovo)
             JSON.stringify(usuarios)
-
             localStorage.setItem('usuarios', JSON.stringify(usuarios))
-        }catch{
+            exibeMsg('Estamos te redirecionando para a pagina de login')
+
+           
+            
+            
+        }
+        catch{
             const arrayUsuarios = []
             arrayUsuarios.push(usuarioNovo)
             
             localStorage.setItem('usuarios', JSON.stringify(arrayUsuarios))
         }
+
+        setTimeout(() => {
+            window.location.href = 'login.html'; 
+        }, 4000);
         
         
 
-        divErros.style.display = 'none'
+        //divMsgs.style.display = 'none'
        
 
-        alert('cadastroCriado')
+
     }
 
    
@@ -115,8 +128,6 @@ function validaNome(username, userEmail){
         TodosOsUsuarios = JSON.parse(TodosOsUsuarios)
         console.log(TodosOsUsuarios.length)
         for(let i = 0; i<TodosOsUsuarios.length; i++){
-           console.log('usuario: ', TodosOsUsuarios[i].user)
-           console.log('emial: ', TodosOsUsuarios[i].email)
             if(TodosOsUsuarios[i].user === username.value){
                 arrayErros.push('nome de usuario ja existe')
                 user.value = ''
@@ -149,18 +160,43 @@ function id(){
 }
 
 
-function exibeErro(erro){
-    const listaErros = document.getElementById('listaErr')
-
+function exibeMsg(msg){
+    console.log(msg)
+    const divMsgs = document.querySelector('.divMsgs')
+    const divSucess = document.querySelector('.msgs-sucess')
+    const listaMsgs = document.getElementById('listaMsgs')
+    const titulo = document.getElementById("titulo")
     const li = document.createElement('li')
-    li.innerHTML = erro
-    listaErros.appendChild(li)
-    divErros.style.display = 'block'
+    listaMsgs.appendChild(li)
 
-    setTimeout(() => {
-        listaErros.removeChild(li)
-    }, 18000);
+    if(arrayErros.length > 0){
+        console.log('executeo aqui')
+        divMsgs.id = 'msgs-err'
+        li.innerHTML = msg
+        divMsgs.style.display = 'block'
+
+        setTimeout(() => {
+            listaMsgs.removeChild(li)
+        }, 18000);
+
+    }
+    else{
+        console.log('entrei no else')
+        divMsgs.id = 'msgs-sucess'
+        titulo.innerHTML = 'Cadastro efetuado com sucesso!'
+        divMsgs.removeChild(listaMsgs)
+        const h2 = document.createElement('h2')
+        h2.innerHTML = msg
+        divMsgs.appendChild(h2)
+        divSucess.style.display = 'block'
+    }
+
+    
 }
 
 //cria hash de senha
+function criaHash(senha){
+    const salt = 10
+    return bcrypt.hashSync(senha, salt)
+}
 
