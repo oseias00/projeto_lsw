@@ -24,6 +24,7 @@ function Login(){
         if(email.value === usuarios[i].email && senha.value === usuarios[i].senha){
             console.log('login efetuado com sucesso')
             localStorage.setItem("Sessão", usuarios[i].user)
+            window.location.href = 'interface.html';
             return true
         }
         else{
