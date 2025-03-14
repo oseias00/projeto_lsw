@@ -39,7 +39,8 @@ function Login(){
         }
 
 
-    }catch(e){
+    }
+    catch(e){
         console.log(e)
         exibeErro('Ainda não há nenhum usuário cadastrado') 
     }
