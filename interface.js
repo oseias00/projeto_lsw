@@ -3,6 +3,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const passwordList = document.getElementById("passwordList");
     const generatePasswordBtn = document.getElementById("generatePassword");
     const generatedPassword = document.getElementById("generatedPassword");
+    const logoutButton = document.querySelector("button[onclick='logout()']");
+
+    // Obtém o usuário logado
+    const userLoggedIn = localStorage.getItem("Sessão");
+
+    if (!userLoggedIn) {
+        window.location.href = "login.html"; // Redireciona se não estiver logado
+    }
 
     generatePasswordBtn.addEventListener("click", () => {
         const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
@@ -26,18 +34,26 @@ document.addEventListener("DOMContentLoaded", () => {
         const password = document.getElementById("password").value;
 
         if (site && username && password) {
-            const passwords = JSON.parse(localStorage.getItem("passwords")) || [];
-            passwords.push({ site, username, password });
-            localStorage.setItem("passwords", JSON.stringify(passwords));
+            const userPasswords = JSON.parse(localStorage.getItem(`passwords_${userLoggedIn}`)) || [];
+            userPasswords.push({ site, username, password });
+            localStorage.setItem(`passwords_${userLoggedIn}`, JSON.stringify(userPasswords));
             displayPasswords();
             passwordForm.reset();
         }
     });
 
+    // Função de logout
+    logoutButton.addEventListener("click", () => {
+        if (localStorage.getItem("Sessão")) {
+            localStorage.removeItem("Sessão");
+        }
+        window.location.href = "login.html";
+    });
+
     function displayPasswords() {
         passwordList.innerHTML = "";
-        const passwords = JSON.parse(localStorage.getItem("passwords")) || [];
-        passwords.forEach((entry, index) => {
+        const userPasswords = JSON.parse(localStorage.getItem(`passwords_${userLoggedIn}`)) || [];
+        userPasswords.forEach((entry, index) => {
             const li = document.createElement("li");
             li.classList.add("password-item");
             li.innerHTML = `<strong>${entry.site}</strong> - ${entry.username} 
@@ -56,9 +72,9 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     window.deletePassword = (index) => {
-        const passwords = JSON.parse(localStorage.getItem("passwords")) || [];
-        passwords.splice(index, 1);
-        localStorage.setItem("passwords", JSON.stringify(passwords));
+        const userPasswords = JSON.parse(localStorage.getItem(`passwords_${userLoggedIn}`)) || [];
+        userPasswords.splice(index, 1);
+        localStorage.setItem(`passwords_${userLoggedIn}`, JSON.stringify(userPasswords));
         displayPasswords();
     };
 
