@@ -1,3 +1,7 @@
+//import
+import bcrypt from "bcryptjs"
+
+
 //pegando elementos com input
 const email = document.getElementById('email')
 const senha = document.getElementById('senha')
@@ -20,8 +24,9 @@ function Login(){
         let usuarios = localStorage.getItem('usuarios')
         usuarios  = JSON.parse(usuarios)
         for(let i = 0; i<usuarios.length; i++){
+        const isMatch = bcrypt.compareSync(senha.value, usuarios[i].senha)
             
-        if(email.value === usuarios[i].email && senha.value === usuarios[i].senha){
+        if(email.value === usuarios[i].email && isMatch){
             console.log('login efetuado com sucesso')
             localStorage.setItem("Sessão", usuarios[i].user)
             window.location.href = 'interface.html';
@@ -34,7 +39,8 @@ function Login(){
         }
 
 
-    }catch{
+    }catch(e){
+        console.log(e)
         exibeErro('Ainda não há nenhum usuário cadastrado') 
     }
   
