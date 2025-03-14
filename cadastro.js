@@ -163,4 +163,7 @@ function exibeErro(erro){
 }
 
 //cria hash de senha
+function criaHash(){
+
+}
 
