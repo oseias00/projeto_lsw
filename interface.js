@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const passwordList = document.getElementById("passwordList");
     const generatePasswordBtn = document.getElementById("generatePassword");
     const generatedPassword = document.getElementById("generatedPassword");
+    const logoutButton = document.querySelector("button[onclick='logout()']");
 
     generatePasswordBtn.addEventListener("click", () => {
         const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
@@ -34,10 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    function logout() {
-        localStorage.removeItem('Sessão');
+    logoutButton.addEventListener("click", () => {
+        if (localStorage.getItem('Sessão')) {
+            localStorage.removeItem('Sessão');
+        }
         window.location.href = 'login.html';
-      }
+    });
 
     function displayPasswords() {
         passwordList.innerHTML = "";
