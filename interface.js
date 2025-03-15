@@ -1,6 +1,6 @@
 //imports
 import CryptoJS from "crypto-js";
-const chaveSecreta = 'minhaChaveSuperSecreta';
+const chaveSecreta = 'XDZ523!Fgz&8oXBis8JkB*8ky)$YRa';
 document.addEventListener("DOMContentLoaded", () => {
     const passwordForm = document.getElementById("passwordForm");
     const passwordList = document.getElementById("passwordList");
